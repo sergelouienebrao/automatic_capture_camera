@@ -1,3 +1,4 @@
+#modification start
 import cv2
 import datetime
 cap = cv2.VideoCapture(0)
@@ -21,3 +22,4 @@ while True:
      cv2.imshow("automatic capture camera", frame)
      if cv2.waitKey(10) == ord("q"): 
       break 
+     
