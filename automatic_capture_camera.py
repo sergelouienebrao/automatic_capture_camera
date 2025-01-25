@@ -13,6 +13,7 @@ capture_delay = 3
 
 while True:
      _, frame = cap.read()
+     frame = cv2.flip(frame, 1)
      original_frame = frame.copy()
      gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
      faces = face_cascade.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5, minSize = (100, 100))
@@ -26,6 +27,7 @@ while True:
         for x1, y1, width1, height1 in smiles:
             cv2.rectangle(face_roi, (x1, y1), (x1 + width1, y1 + height1), (0, 0, 255), 2)
             current_time = time.time()
+
             if current_time - last_capture_time >= capture_delay:
                for i in range(3, 0, -1):
                   countdown_frame = frame.copy()
