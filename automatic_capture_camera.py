@@ -35,11 +35,12 @@ while True:
 
             time_stamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             file_name = f"selfie-{time_stamp}.png"
+            last_capture_time = current_time
             cv2.imwrite(file_name, original_frame) 
     
      cv2.imshow("automatic capture camera", frame)
      if cv2.waitKey(10) == ord("q"): 
       break 
      
-# cap.release()
-# cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows()
