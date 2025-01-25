@@ -8,7 +8,8 @@ cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier(r'C:/Desktop/mycodes/.venv/Lib/site-packages/haarcascade_frontalface_default.xml')
 smile_cascade = cv2.CascadeClassifier(r'C:/Downloads/haarcascade_smile.xml')
 
-
+last_capture_time = 0
+capture_delay = 3
 
 while True:
      _, frame = cap.read()
