@@ -8,6 +8,7 @@ import cv2
 import datetime
 import time
 import winsound
+import numpy as np
 
 cap = cv2.VideoCapture(0)
 
@@ -21,11 +22,16 @@ if face_cascade.empty() or smile_cascade.empty():
     cv2.destroyAllWindows()
     exit()
 
+def apply_filter(frame, filter_type):
+    if filter_type == "grayscale":
+        return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        
 capture_delay = 3
 capture_interval = 5  # Interval in seconds between captures
 countdown_start_time = None
 countdown_in_progress = False
 last_capture_time = 0  # Tracks the time of the last capture
+selected_filter = "none" #default filter
 
 while True:
     ret, frame = cap.read()
@@ -34,6 +40,10 @@ while True:
 
     frame = cv2.flip(frame, 1)
     original_frame = frame.copy()  # Keep an unaltered copy for saving
+
+    if selected_filter != 'none':
+      frame = apply_filter(frame, selected_filter)
+
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(100, 100))
 
@@ -75,6 +85,9 @@ while True:
             last_capture_time = time.time()  # Update last capture time
             winsound.Beep(1500, 500)
             winsound.Beep(2000, 300)
+
+    cv2.putText(frame, "Press 'f' to toggle filters", (10, 470), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+    cv2.putText(frame, f"Current filter: {selected_filter}", (10, 450), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
     cv2.imshow("automatic capture camera", frame)
 
