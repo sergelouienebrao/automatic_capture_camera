@@ -2,6 +2,7 @@
 # countdown
 # flipped cam
 # multiface detection
+#beep sound
 
 import cv2
 import datetime
@@ -62,7 +63,9 @@ while True:
             if elapsed_time - int(elapsed_time) < 0.1:
                 winsound.Beep(1000, 100) 
                 
-        else:
+
+        elif countdown_time == 0:
+            winsound.Beep(1200, 200)
             # Capture photo
             time_stamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             file_name = f"selfie-{time_stamp}.png"
@@ -70,6 +73,8 @@ while True:
             countdown_in_progress = False
             countdown_start_time = None
             last_capture_time = time.time()  # Update last capture time
+            winsound.Beep(1500, 500)
+            winsound.Beep(2000, 300)
 
     cv2.imshow("automatic capture camera", frame)
 
