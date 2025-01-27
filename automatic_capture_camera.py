@@ -2,7 +2,8 @@
 # countdown
 # flipped cam
 # multiface detection
-#beep sound
+# beep sound
+# filters
 
 import cv2
 import datetime
