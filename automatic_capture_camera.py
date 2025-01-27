@@ -6,6 +6,7 @@
 import cv2
 import datetime
 import time
+import winsound
 
 cap = cv2.VideoCapture(0)
 
@@ -56,8 +57,13 @@ while True:
         if countdown_time > 0:
             cv2.putText(frame, f"Capturing in {countdown_time}", (50, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
+            
+            #Play sound during countdown
+            if elapsed_time - int(elapsed_time) < 0.1:
+                winsound.Beep(1000, 100) 
+                
         else:
-            # Capture photo (save the unaltered frame)
+            # Capture photo
             time_stamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             file_name = f"selfie-{time_stamp}.png"
             cv2.imwrite(file_name, original_frame)
